@@ -1,61 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Laravel 12 + React + Tailwind Starter
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Project ini dibuat dengan **Laravel 12** menggunakan **Breeze (React + Tailwind)** sebagai starter kit.  
+Sudah terdapat fitur **Authentication (Login, Register, Forgot Password, Logout)** dan siap untuk dikembangkan lebih lanjut.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 Persyaratan
+Sebelum mulai, pastikan sudah terinstall di komputer kamu:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [PHP >= 8.2](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [Node.js >= 18 + NPM](https://nodejs.org/)
+- [MySQL/MariaDB](https://www.mysql.com/) atau database lain yang didukung Laravel
+- [Git](https://git-scm.com/)
+- **(Opsional)** [Laragon](https://laragon.org/) (Windows) atau [Docker](https://www.docker.com/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚡ Instalasi Project
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Clone Repository
+```bash
+git clone https://github.com/username/nama-project.git
+cd nama-project
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 2. Install Dependency Laravel
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Install Dependency Frontend
+```bash
+npm install
+```
 
-## Laravel Sponsors
+### 4. Setup Environment
+Salin file `.env.example` menjadi `.env`
+```bash
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Atur konfigurasi database di `.env`:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-### Premium Partners
+### 5. Generate App Key
+```bash
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 6. Install Breeze (React + Tailwind)
+```bash
+composer require laravel/breeze --dev
+php artisan breeze:install react
+npm install && npm run dev
+```
 
-## Contributing
+### 7. Migrasi Database
+```bash
+php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## ▶️ Menjalankan Project
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Jalankan server Laravel
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+### Jalankan Vite (Frontend Dev Server)
+```bash
+npm run dev
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Akses aplikasi di:  
+👉 `http://127.0.0.1:8000`
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📂 Struktur Project
+
+```bash
+resources/js/
+ ├─ Components/   # Komponen kecil (Button, Navbar, dll)
+ ├─ Pages/        # Halaman utama (Dashboard.jsx, Login.jsx, dll)
+ ├─ app.jsx       # Root React App
+ └─ bootstrap.js  # Bootstrap script
+
+routes/web.php   # Definisi route Laravel
+.env             # Konfigurasi environment
+```
+
+---
+
+## 🎨 Cara Ngoding React
+- Buat **komponen kecil** di `resources/js/Components/`
+- Buat **halaman** di `resources/js/Pages/`
+- Tambahkan **route** di `routes/web.php` menggunakan `Inertia::render()`
+- Gunakan **Tailwind CSS** langsung di className untuk styling
+
+Contoh route di Laravel:
+```php
+Route::get('/notes', function () {
+    return Inertia::render('Notes/Index');
+});
+```
+
+Contoh halaman React:
+```jsx
+export default function Index() {
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold text-purple-700">📒 My Notes</h1>
+      <p className="mt-2 text-gray-600">Ini halaman catatan kamu.</p>
+    </div>
+  );
+}
+```
+
+---
+
+## ✅ Checklist Setup Cepat
+1. `composer install`
+2. `npm install`
+3. Copy `.env` & setting database
+4. `php artisan key:generate`
+5. `composer require laravel/breeze --dev`
+6. `php artisan breeze:install react`
+7. `npm install && npm run dev`
+8. `php artisan migrate`
+9. `php artisan serve`
+
+---
+
+## 👥 Kontributor
+- **Nama Kamu** (Developer)
+- **Teman Kamu** (Collaborator)
+
+---
+
+## 📄 Lisensi
+Project ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT).
