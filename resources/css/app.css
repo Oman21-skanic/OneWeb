@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family: "Telegraf";
+    src: url("../../public/fonts/FontsFree-Net-Telegraf-UltraBold-800.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
