@@ -84,7 +84,7 @@ export default function Projects() {
               </div>
 
               <div className="p-8 relative z-10">
-                <h3 className="text-2xl font-telegraf mb-6">
+                <h3 className="text-2xl font-comfortaa mb-6">
                   {project.title}
                 </h3>
 

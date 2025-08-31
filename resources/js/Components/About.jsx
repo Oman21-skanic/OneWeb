@@ -1,124 +1,171 @@
 import { motion } from "framer-motion";
+import { useEffect, useState, useCallback } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
-// Data anggota tim
 const team = [
-    {
-        name: "Putri Salsabila",
-        role: "Front-end Developer",
-        description: "Spesialis React & Tailwind, suka membuat UI yang clean dan responsif.",
-        skills: ["React", "Tailwind", "Framer Motion", "JavaScript"],
-        img: "/images/kinan.jpg",
-    },
-    {
-        name: "Nabila Indriyanti",
-        role: "Back-end Developer",
-        description: "Ahli Laravel & API, fokus pada performance dan keamanan sistem.",
-        skills: ["Laravel", "MySQL", "PHP", "REST API"],
-        img: "/images/nabila.jpg",
-    },
-    {
-        name: "Melani Putri",
-        role: "UI/UX Designer",
-        description: "Mendesain interface yang intuitif dan menyenangkan untuk digunakan.",
-        skills: ["Figma", "Adobe XD", "User Research", "Prototyping"],
-        img: "/images/melani.jpg",
-    },
-    {
-        name: "Ahmad Rizky",
-        role: "DevOps Engineer",
-        description: "Mengatur deployment & CI/CD, menjaga sistem tetap scalable dan stabil.",
-        skills: ["Docker", "AWS", "CI/CD", "Linux"],
-        img: "/images/rizky.jpg",
-    },
-    {
-        name: "Fajar Pratama",
-        role: "QA / Tester",
-        description: "Memastikan kualitas produk melalui testing otomatis & manual.",
-        skills: ["Testing", "Selenium", "Jest", "Postman"],
-        img: "/images/fajar.jpg",
-    },
-    {
-        name: "Dewi Anggraeni",
-        role: "Product Manager",
-        description: "Memimpin roadmap dan memastikan project sesuai kebutuhan pengguna.",
-        skills: ["Agile", "Scrum", "Wireframing", "Project Management"],
-        img: "/images/dewi.jpg",
-    },
+  {
+    name: "M. Abdul Rohman",
+    role: "Project Manager",
+    img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
+    socials: { ig: "#", linkedin: "#", github: "#" },
+  },
+  {
+    name: "Putri Salsabila",
+    role: "Front-End Developer",
+    img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
+    socials: { ig: "#", linkedin: "#", github: "#" },
+  },
+  {
+    name: "Divinka Azani Rachdian",
+    role: "Front-End Developer",
+    img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
+    socials: { ig: "#", linkedin: "#", github: "#" },
+  },
+  {
+    name: "Vio Adytia Syahputra",
+    role: "Data Analyst",
+    img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
+    socials: { ig: "#", linkedin: "#", github: "#" },
+  },
+  {
+    name: "M. Fauzi Ibnu Kosim",
+    role: "UX/UI Designer",
+    img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
+    socials: { ig: "#", linkedin: "#", github: "#" },
+  },
+  {
+    name: "Rakha Pradipta",
+    role: "Digital Business",
+    img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
+    socials: { ig: "#", linkedin: "#", github: "#" },
+  },
 ];
 
-const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.15 } },
+const cardContainer = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.2, when: "beforeChildren" } },
 };
-const item = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 16 } },
+
+const cardItem = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } },
 };
+
+function TeamCard({ member }) {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(true);
+    setTimeout(() => setClicked(false), 1500); 
+  };
+
+  return (
+    <motion.div
+      variants={cardItem}
+      whileHover={{ y: -5 }}
+      onClick={handleClick}
+      className={`relative w-[240px] md:w-[260px] bg-black border border-gray-800 rounded-2xl overflow-hidden
+        transition-all duration-500 cursor-pointer
+        shadow-md ${clicked ? "shadow-[0_0_25px_#00ff99]" : ""}`}
+    >
+      <div className="relative w-full h-[220px]">
+        <img
+          src={member.img}
+          alt={`Foto ${member.name}`}
+          className="w-full h-full object-cover rounded-t-2xl"
+        />
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
+          <a href={member.socials.ig} className="bg-gray-900 p-2 rounded-full text-white hover:bg-gray-700 transition">
+            <FaInstagram />
+          </a>
+          <a href={member.socials.linkedin} className="bg-gray-900 p-2 rounded-full text-white hover:bg-gray-700 transition">
+            <FaLinkedin />
+          </a>
+          <a href={member.socials.github} className="bg-gray-900 p-2 rounded-full text-white hover:bg-gray-700 transition">
+            <FaGithub />
+          </a>
+        </div>
+      </div>
+
+      <div className="p-4 text-center">
+        <h3 className="text-lg font-bold text-white">{member.name}</h3>
+        <p className="text-gray-300 text-sm">{member.role}</p>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function About() {
-    return (
-        <section id="about" className="relative py-28 border-t border-white/10 bg-black">
-            {/* subtle background */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(34,197,94,0.06),transparent_60%)] " />
+  const [init, setInit] = useState(false);
 
-            <div className="relative mx-auto max-w-6xl px-6 text-center mt-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="mb-16"
-                >
-                    <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-4 py-1 text-sm text-green-300 mb-4">
-                        Tim Kami
-                    </div>
-                    <h2 className="text-4xl font-bold text-white mb-3">Bertemu dengan kreator kami</h2>
-                    <p className="text-gray-300 max-w-2xl mx-auto">
-                        Kami adalah tim berbakat yang menggabungkan teknologi, desain, dan strategi untuk
-                        menghasilkan produk digital berkualitas tinggi.
-                    </p>
-                </motion.div>
+  useEffect(() => {
+    initParticlesEngine(async (engine) => await loadSlim(engine)).then(() => setInit(true));
+  }, []);
 
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="grid gap-12 sm:grid-cols-1 md:grid-cols-2"
-                >
-                    {team.map((member, i) => (
-                        <motion.div
-                            key={i}
-                            variants={item}
-                            className="bg-black/60 border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center shadow-lg hover:scale-105 transition-transform"
-                        >
-                            {/* Foto */}
-                            <div className="w-40 h-40 rounded-xl overflow-hidden border-2 border-green-500 mb-4">
-                                <img
-                                    src="https://i.pinimg.com/1200x/2c/be/51/2cbe51c91da3736934397d7f053b3d2d.jpg"
-                                    alt={member.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            {/* Nama & role */}
-                            <h3 className="text-xl font-semibold text-white">{member.name}</h3>
-                            <p className="text-green-300 text-sm mt-1 mb-2">{member.role}</p>
-                            {/* Deskripsi */}
-                            <p className="text-gray-300 text-sm mb-3">{member.description}</p>
-                            {/* Skills */}
-                            <div className="flex flex-wrap justify-center gap-2 mt-2">
-                                {member.skills.map((skill, idx) => (
-                                    <span
-                                        key={idx}
-                                        className="bg-green-500/20 text-green-300 text-xs px-3 py-1 rounded-full border border-green-500"
-                                    >
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
-    );
+  const particlesLoaded = useCallback(async (container) => {
+    console.log("Particles loaded:", container);
+  }, []);
+
+  return (
+    <section id="about" className="relative py-32 bg-black overflow-hidden">
+      {init && (
+        <Particles
+          id="tsparticles"
+          loaded={particlesLoaded}
+          options={{
+            fullScreen: { enable: false },
+            background: { color: { value: "transparent" } },
+            fpsLimit: 60,
+            particles: {
+              number: { value: 25, density: { enable: true, area: 900 } },
+              color: { value: "#00ff2f" },
+              shape: { type: "circle" },
+              opacity: { value: { min: 0.3, max: 0.6 }, random: true },
+              size: { value: { min: 2, max: 4 }, random: true },
+              move: { enable: true, speed: { min: 0.5, max: 1.2 }, outModes: "out" },
+              links: {
+                enable: true,
+                distance: 120,
+                color: "#00ff2f",
+                opacity: 0.2,
+                width: 1,
+              },
+            },
+            interactivity: {
+              events: { onHover: { enable: true, mode: "grab" }, onClick: { enable: true, mode: "push" } },
+              modes: { grab: { distance: 180, links: { opacity: 0.25 } }, push: { quantity: 2 } },
+            },
+            detectRetina: true,
+          }}
+          className="absolute inset-0 z-0"
+        />
+      )}
+
+      <div className="relative mx-auto max-w-7xl px-6 text-center z-10">
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="mb-20">
+          <div className="text-4xl font-comfortaa text-green-500 font-black mb-6">
+            MEET OUR TEAM
+          </div>
+          <h2 className="text-5xl font-telegraf text-white mb-4 tracking-tight">
+            Teamwork makes the dream work
+          </h2>
+        </motion.div>
+
+        {/* Grid team */}
+        <motion.div
+          variants={cardContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid gap-y-10 gap-x-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto justify-items-center"
+        >
+          {team.map((member, i) => (
+            <TeamCard key={i} member={member} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 }

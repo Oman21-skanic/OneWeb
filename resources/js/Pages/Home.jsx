@@ -173,7 +173,7 @@ function Hero() {
     const { y, opacity } = useParallax(ref);
     return (
         <section id="home" ref={ref} className="relative min-h-[92vh] flex items-center overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,197,94,0.15),transparent_40%),radial-gradient(circle_at_80%_20%,rgba(34,197,94,0.15),transparent_40%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#0B8C5C,transparent_40%),radial-gradient(circle_at_80%_20%,#0B8C5C,transparent_40%)]" />
             <motion.div style={{ y, opacity }} className="relative z-10 w-full">
                 <div className="mx-auto max-w-7xl px-6">
                     <motion.div

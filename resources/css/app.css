@@ -10,15 +10,15 @@
 }
 
 @font-face {
-    font-family: "Raligo";
-    src: url("../../public/fonts/Raligo.otf") format("truetype");
+    font-family: "Jost";
+    src: url("../../public/fonts/jost.medium.otf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Telegraf";
-    src: url("../../public/fonts/jost.medium.otf") format("truetype");
+    src: url("../../public/fonts/Satoshi-Variable.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
