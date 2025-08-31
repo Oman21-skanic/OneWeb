@@ -14,6 +14,6 @@ export default function LandingPage() {
             <Projects />
             <Contact />
             <Footer />
-      </div>
-    );
+        </div>
+    );
 }

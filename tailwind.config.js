@@ -15,8 +15,8 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 comfortaa: ['Comfortaa', 'sans-serif'],
-                raligo: ['raligo'],
-                telegrf: ['Telegraf'],
+                jost: ['jost'],
+                telegraf: ['Telegraf'],
             },
         },
     },

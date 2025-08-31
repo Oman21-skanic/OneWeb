@@ -10,15 +10,22 @@
 }
 
 @font-face {
-    font-family: "Raligo";
-    src: url("/fonts/Raligo.otf") format("opentype");
+    font-family: "Jost";
+    src: url("../../public/fonts/jost.medium.otf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Telegraf";
-    src: url("/fonts/jost.medium.otf") format("opentype");
+    src: url("../../public/fonts/Satoshi-Variable.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Neue-Montreal-Light";
+    src: url("../../public/fonts/NeueMontreal-Light.otf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
