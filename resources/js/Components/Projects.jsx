@@ -92,7 +92,7 @@ export default function Projects() {
                   {project.tech.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 text-sm rounded-2xl bg-green-400 text-black font-telegraf shadow-md"
+                      className="px-3 py-1 text-sm rounded-2xl bg-green-400 text-black font-comfortaa shadow-md"
                     >
                       {tech}
                     </span>
@@ -104,7 +104,7 @@ export default function Projects() {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-400 to-green-600 text-black font-telegraf hover:shadow-lg hover:shadow-green-500/20 transition"
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-400 to-green-600 text-black font-comfortaa hover:shadow-lg hover:shadow-green-500/20 transition"
                   >
                     <ExternalLink size={18} /> Live Demo
                   </a>
@@ -113,7 +113,7 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 hover:border-green-500/40 transition font-telegraf"
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 hover:border-green-500/40 transition font-comfortaa"
                   >
                     <Github size={18} /> GitHub
                   </a>

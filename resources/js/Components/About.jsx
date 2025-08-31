@@ -13,8 +13,8 @@
         img: "/assets/images/testimg.jpg",
     },
     {
-        name: "Nabila Indriyanti",
-        role: "Back-end Developer",
+        name: "Divinka Azani Rachdian",
+        role: "Front-end Developer",
         description: "Ahli Laravel & API, fokus pada performance dan keamanan sistem.",
         skills: ["Laravel", "MySQL", "PHP", "REST API"],
         img: "/assets/images/testimg.jpg",
@@ -182,14 +182,19 @@
             className="mb-20"
             >
             <div className="inline-flex items-center gap-3 rounded-full border border-green-500/20 bg-black/50 px-5 py-2 text-sm font-medium text-green-300 shadow-inner mb-6">
-                Tim Kami
+                Our Team
             </div>
-            <h2 className="text-5xl font-extrabold text-white mb-4 tracking-tight">
-                Bertemu dengan Kerennya Tim Kami
+            <h2
+                className="text-5xl font-extrabold text-white mb-4 tracking-tight font-raligo"
+                style={{
+                fontFamily: "'Raligo', sans-serif",
+                }}
+            >
+                Unveiling Our Elite Team
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
-                Kami adalah tim visioner yang menggabungkan kreativitas, teknologi, dan strategi untuk
-                menciptakan pengalaman digital yang luar biasa.
+                We are a forward-thinking collective, blending cutting-edge innovation, technology, and
+                strategy to craft exceptional digital experiences.
             </p>
             </motion.div>
 

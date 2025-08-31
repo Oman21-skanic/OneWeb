@@ -23,9 +23,13 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@tsparticles/engine": "^3.9.1",
         "@tsparticles/react": "^3.0.0",
         "@tsparticles/slim": "^3.9.1",
+=======
+        "@fortawesome/fontawesome-free": "^7.0.0",
+>>>>>>> 8f8b8ce326d094ec08a65eb772b638e0ced914a4
         "framer-motion": "^12.23.12",
         "lucide-react": "^0.542.0"
     }
