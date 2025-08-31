@@ -15,6 +15,7 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 telegraf: ['Telegraf', 'sans-serif'],
+                raligo: ['raligo'],
             },
         },
     },

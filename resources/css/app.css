@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
     font-family: "Telegraf";
-    src: url("../../public/fonts/FontsFree-Net-Telegraf-UltraBold-800.ttf") format("truetype");
-    font-weight: 700;
+    src: url("../../public/fonts/Comfortaa-Regular.ttf") format("truetype");
+    font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: "Raligo";
+    src: url("../../public/fonts/Raligo.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
