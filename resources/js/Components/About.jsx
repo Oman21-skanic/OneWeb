@@ -167,7 +167,7 @@
             }}
             className="absolute inset-0 z-0"
             style={{
-                filter: "blur(3px)",
+                filter: "blur(100px)",
                 boxShadow: "0 0 10px rgba(0, 255, 47, 0.5), 0 0 20px rgba(0, 255, 47, 0.3)",
             }}
             />
@@ -182,15 +182,15 @@
             className="mb-20"
             >
             <div className="inline-flex items-center gap-3 rounded-full border border-green-500/20 bg-black/50 px-5 py-2 text-sm font-medium text-green-300 shadow-inner mb-6">
-                Our Team
+                Meet our team
             </div>
             <h2
-                className="text-5xl font-extrabold text-white mb-4 tracking-tight font-raligo"
+                className="text-5xl font-extrabold text-white mb-4 tracking-wide font-raligo"
                 style={{
                 fontFamily: "'Raligo', sans-serif",
                 }}
             >
-                Unveiling Our Elite Team
+                UNVEILING OUR TEAM
             </h2>
             <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
                 We are a forward-thinking collective, blending cutting-edge innovation, technology, and
@@ -204,7 +204,7 @@
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 backdrop-blur-md relative"
+            className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative"
             style={{
                 position: "relative",
                 overflow: "hidden",

@@ -43,7 +43,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="relative min-h-screen bg-black text-white py-20 overflow-hidden">
+    <section id="contact" className="relative min-h-screen bg-black text-white py-20 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none" />
 
       <motion.h1

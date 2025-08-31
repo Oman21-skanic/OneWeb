@@ -13,6 +13,8 @@ import { ArrowRight, Github, Mail, Menu, X, Users, Rocket, Hammer, ChevronDown, 
  * 6) Tech/Values strip
  * 7) Contact (form POST ke Laravel API)
  * 8) Footer + Socials
+ * 9) Reveal Animation on Scroll
+ * 10) Scroll Progress Indicator
  *
  * ⚙️ Integrasi Backend Laravel (opsional, lihat komentar `API_BASE` di bawah)
  */
@@ -20,7 +22,7 @@ import { ArrowRight, Github, Mail, Menu, X, Users, Rocket, Hammer, ChevronDown, 
 // 👉 Ganti ini jika API Laravel kamu berbeda (contoh: http://localhost:8000/api)
 const API_BASE = "http://localhost:8000/api";
 
-// Fallback data jika fetch ke Laravel gagal (agar demo tetap hidup)
+// Fallback data jika fetch ke Laravel gagal
 const sampleProjects = [
     {
         id: 1,
@@ -74,6 +76,10 @@ const item = {
     hidden: { opacity: 0, y: 12 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 16 } },
 };
+const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 function useSectionObserver(ids) {
     const [active, setActive] = useState(ids[0]);
@@ -100,11 +106,26 @@ function useParallax(ref) {
     return { y, opacity };
 }
 
+function useScrollProgress() {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({ target: ref });
+    const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    return { ref, scaleX };
+}
+
 function Navbar() {
     const [open, setOpen] = useState(false);
     const active = useSectionObserver(nav.map((n) => n.id));
+    const { ref, scaleX } = useScrollProgress();
+
     return (
-        <div className="fixed top-0 inset-x-0 z-50">
+        <div ref={ref} className="fixed top-0 inset-x-0 z-50">
+            {scaleX && (
+                <motion.div
+                    className="h-1 bg-gradient-to-r from-green-500/0 via-green-500/80 to-green-500/0"
+                    style={{ scaleX: scaleX, transformOrigin: "0%" }}
+                />
+            )}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="mt-4 rounded-2xl border border-green-500/20 bg-black/50 backdrop-blur supports-[backdrop-filter]:bg-black/40 shadow-lg">
                     <div className="flex items-center justify-between px-4 py-3">
@@ -226,7 +247,7 @@ function About() {
             <div className="absolute inset-0 opacity-30 pointer-events-none bg-[radial-gradient(ellipse_at_bottom,rgba(34,197,94,0.08),transparent_60%)]" />
             <div className="relative mx-auto max-w-7xl px-6">
                 <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid gap-10 md:grid-cols-2 items-center">
-                    <motion.div variants={item} className="">
+                    <motion.div variants={fadeInUp}>
                         <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-3 py-1 text-xs text-green-300">
                             <Users size={14} />
                             <span>Tentang Kami</span>
@@ -246,7 +267,7 @@ function About() {
                             <a href="#projects" className="rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-2 text-green-300 hover:bg-green-500/20">Portfolio</a>
                         </div>
                     </motion.div>
-                    <motion.div variants={item} className="">
+                    <motion.div variants={fadeInUp}>
                         <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-green-500/10 to-transparent p-6 shadow-2xl">
                             <div className="grid grid-cols-2 gap-4">
                                 {["React", "Laravel", "Tailwind", "MySQL", "Docker", "Framer Motion"].map((t) => (
@@ -273,8 +294,8 @@ function About() {
 }
 
 function Projects() {
-    const [projects, setProjects] = useState(sampleProjects);
-    const [loading, setLoading] = useState(false);
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -285,8 +306,14 @@ function Projects() {
                 const res = await fetch(`${API_BASE}/projects`);
                 if (!res.ok) throw new Error("Gagal memuat data proyek");
                 const data = await res.json();
-                if (!ignore && Array.isArray(data)) setProjects(data);
+                if (!ignore && Array.isArray(data)) {
+                    setProjects(data.length ? data : sampleProjects);
+                } else {
+                    setProjects(sampleProjects);
+                }
             } catch (e) {
+                console.error("Fetch error:", e);
+                setProjects(sampleProjects);
                 setError("Menampilkan data contoh (API tidak terhubung)");
             } finally {
                 setLoading(false);
@@ -296,56 +323,54 @@ function Projects() {
         return () => { ignore = true; };
     }, []);
 
+    if (loading) return <div className="text-center py-24 text-gray-400">Memuat proyek...</div>;
+    if (!projects.length) return <div className="text-center py-24 text-red-400">Tidak ada proyek yang tersedia.</div>;
+
     return (
         <section id="projects" className="relative py-24 border-t border-white/10">
             <div className="absolute inset-0 opacity-30 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(34,197,94,0.08),transparent_60%)]" />
             <div className="relative mx-auto max-w-7xl px-6">
-                <div className="flex items-end justify-between gap-4">
-                    <div>
-                        <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-3 py-1 text-xs text-green-300">
-                            <Rocket size={14} />
-                            <span>Projects</span>
+                <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }}>
+                    <div className="flex items-end justify-between gap-4">
+                        <div>
+                            <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-3 py-1 text-xs text-green-300">
+                                <Rocket size={14} />
+                                <span>Projects</span>
+                            </div>
+                            <h2 className="mt-4 text-3xl font-bold text-white">Yang sudah & akan kami bangun</h2>
+                            <p className="mt-2 text-gray-300">Beberapa contoh produk yang kami garap. Data bisa ditarik dari API Laravel.</p>
                         </div>
-                        <h2 className="mt-4 text-3xl font-bold text-white">Yang sudah & akan kami bangun</h2>
-                        <p className="mt-2 text-gray-300">Beberapa contoh produk yang kami garap. Data bisa ditarik dari API Laravel.</p>
+                        <div className="text-sm text-gray-400">{error || "Terhubung"}</div>
                     </div>
-                    <div className="text-sm text-gray-400">{loading ? "Memuat…" : error || "Terhubung"}</div>
-                </div>
-
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-                >
-                    {projects.map((p, i) => (
-                        <motion.a
-                            variants={item}
-                            key={p.id || i}
-                            href={p.link || "#"}
-                            target={p.link ? "_blank" : undefined}
-                            rel={p.link ? "noreferrer" : undefined}
-                            className="group relative rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 hover:border-green-500/30 hover:from-green-500/10 transition overflow-hidden"
-                        >
-                            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-green-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition" />
-                            <h3 className="text-xl font-semibold text-white">{p.title}</h3>
-                            <p className="mt-2 text-sm text-gray-300">{p.description}</p>
-                            <div className="mt-4 flex flex-wrap gap-2">
-                                {(p.tech || []).map((t) => (
-                                    <span key={t} className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs text-gray-300">{t}</span>
-                                ))}
-                            </div>
-                            <div className="mt-5 flex items-center gap-4 text-sm text-green-300">
-                                {p.link && <span className="inline-flex items-center gap-1">Live <ExternalLink size={16} /></span>}
-                                {p.repo && (
-                                    <a href={p.repo} onClick={(e) => e.stopPropagation()} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:underline">
-                                        <Github size={16} /> Repo
-                                    </a>
-                                )}
-                            </div>
-                        </motion.a>
-                    ))}
+                    <motion.div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {projects.map((p, i) => (
+                            <motion.div variants={fadeInUp} key={p.id || `project-${i}`} initial="hidden" whileInView="show" viewport={{ once: true }}>
+                                <a
+                                    href={p.link || "#"}
+                                    target={p.link ? "_blank" : undefined}
+                                    rel={p.link ? "noreferrer" : undefined}
+                                    className="group relative rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent p-6 hover:border-green-500/30 hover:from-green-500/10 transition overflow-hidden"
+                                >
+                                    <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-green-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition" />
+                                    <h3 className="text-xl font-semibold text-white">{p.title}</h3>
+                                    <p className="mt-2 text-sm text-gray-300">{p.description}</p>
+                                    <div className="mt-4 flex flex-wrap gap-2">
+                                        {(p.tech || []).map((t) => (
+                                            <span key={t} className="rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs text-gray-300">{t}</span>
+                                        ))}
+                                    </div>
+                                    <div className="mt-5 flex items-center gap-4 text-sm text-green-300">
+                                        {p.link && <span className="inline-flex items-center gap-1">Live <ExternalLink size={16} /></span>}
+                                        {p.repo && (
+                                            <a href={p.repo} onClick={(e) => e.stopPropagation()} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 hover:underline">
+                                                <Github size={16} /> Repo
+                                            </a>
+                                        )}
+                                    </div>
+                                </a>
+                            </motion.div>
+                        ))}
+                    </motion.div>
                 </motion.div>
             </div>
         </section>
@@ -374,6 +399,7 @@ function Contact() {
             setForm({ name: "", email: "", message: "" });
             setStatus("Terkirim! Kami akan balas secepatnya.");
         } catch (err) {
+            console.error("Contact error:", err);
             setStatus("Gagal mengirim. Pastikan API Laravel /api/contact aktif.");
         } finally {
             setSending(false);
@@ -384,58 +410,59 @@ function Contact() {
         <section id="contact" className="relative py-24 border-t border-white/10">
             <div className="absolute inset-0 opacity-30 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.08),transparent_60%)]" />
             <div className="relative mx-auto max-w-7xl px-6">
-                <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-3 py-1 text-xs text-green-300">
-                    <Mail size={14} />
-                    <span>Kontak</span>
-                </div>
-                <h2 className="mt-4 text-3xl font-bold text-white">Ayo ngobrol tentang ide kamu</h2>
-                <p className="mt-2 text-gray-300 max-w-2xl">Kirim pesan singkat mengenai kebutuhanmu. Kami akan menanggapi secepatnya.</p>
-
-                <form onSubmit={onSubmit} className="mt-8 grid gap-4 sm:grid-cols-2">
-                    <div className="sm:col-span-1">
-                        <label className="text-sm text-gray-300">Nama</label>
-                        <input
-                            required
-                            value={form.name}
-                            onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
-                            className="mt-1 w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Nama kamu"
-                        />
+                <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-3 py-1 text-xs text-green-300">
+                        <Mail size={14} />
+                        <span>Kontak</span>
                     </div>
-                    <div className="sm:col-span-1">
-                        <label className="text-sm text-gray-300">Email</label>
-                        <input
-                            required
-                            type="email"
-                            value={form.email}
-                            onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
-                            className="mt-1 w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="email@domain.com"
-                        />
-                    </div>
-                    <div className="sm:col-span-2">
-                        <label className="text-sm text-gray-300">Pesan</label>
-                        <textarea
-                            required
-                            minLength={10}
-                            value={form.message}
-                            onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
-                            rows={5}
-                            className="mt-1 w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Ceritakan kebutuhan atau ide projectmu"
-                        />
-                    </div>
-                    <div className="sm:col-span-2 flex items-center gap-3">
-                        <button
-                            disabled={!canSubmit || sending}
-                            className="inline-flex items-center gap-2 rounded-2xl bg-green-500 px-6 py-3 font-semibold text-black hover:bg-green-400 transition disabled:opacity-50"
-                        >
-                            {sending ? "Mengirim…" : "Kirim Pesan"}
-                            <ArrowRight size={18} />
-                        </button>
-                        <span className="text-sm text-gray-400">{status}</span>
-                    </div>
-                </form>
+                    <h2 className="mt-4 text-3xl font-bold text-white">Ayo ngobrol tentang ide kamu</h2>
+                    <p className="mt-2 text-gray-300 max-w-2xl">Kirim pesan singkat mengenai kebutuhanmu. Kami akan menanggapi secepatnya.</p>
+                    <form onSubmit={onSubmit} className="mt-8 grid gap-4 sm:grid-cols-2">
+                        <motion.div variants={fadeInUp}>
+                            <label className="text-sm text-gray-300">Nama</label>
+                            <input
+                                required
+                                value={form.name}
+                                onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))}
+                                className="mt-1 w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="Nama kamu"
+                            />
+                        </motion.div>
+                        <motion.div variants={fadeInUp}>
+                            <label className="text-sm text-gray-300">Email</label>
+                            <input
+                                required
+                                type="email"
+                                value={form.email}
+                                onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
+                                className="mt-1 w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="email@domain.com"
+                            />
+                        </motion.div>
+                        <motion.div variants={fadeInUp} className="sm:col-span-2">
+                            <label className="text-sm text-gray-300">Pesan</label>
+                            <textarea
+                                required
+                                minLength={10}
+                                value={form.message}
+                                onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
+                                rows={5}
+                                className="mt-1 w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                placeholder="Ceritakan kebutuhan atau ide projectmu"
+                            />
+                        </motion.div>
+                        <motion.div variants={fadeInUp} className="sm:col-span-2 flex items-center gap-3">
+                            <button
+                                disabled={!canSubmit || sending}
+                                className="inline-flex items-center gap-2 rounded-2xl bg-green-500 px-6 py-3 font-semibold text-black hover:bg-green-400 transition disabled:opacity-50"
+                            >
+                                {sending ? "Mengirim…" : "Kirim Pesan"}
+                                <ArrowRight size={18} />
+                            </button>
+                            <span className="text-sm text-gray-400">{status}</span>
+                        </motion.div>
+                    </form>
+                </motion.div>
             </div>
         </section>
     );
@@ -460,8 +487,10 @@ function Footer() {
 }
 
 export default function LandingPage() {
+    const scrollRef = useRef(null);
+
     return (
-        <div className="bg-black text-white selection:bg-green-500/40">
+        <div ref={scrollRef} className="bg-black text-white selection:bg-green-500/40">
             <Navbar />
             <Hero />
             <About />

@@ -14,7 +14,6 @@ export default function LandingPage() {
             <Projects />
             <Contact />
             <Footer />
-            <a href="#home" className="fixed bottom-6 right-6 inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 text-white hover:bg-white/10" aria-label="Back to top">↑</a>
-        </div>
-    );
+      </div>
+    );
 }

@@ -39,7 +39,7 @@ export default function Navbar() {
                                 <div className="grid gap-2">
                                     {nav.map((n)=>(
                                         <a key={n.id} href={`#${n.id}`} onClick={()=>setOpen(false)}
-                                           className={`px-3 py-2 rounded-xl text-sm transition ${active===n.id?"text-green-400 bg-green-500/10":"text-gray-300 hover:text-white hover:bg-white/5"}`}>
+                                            className={`px-3 py-2 rounded-xl text-sm transition ${active===n.id?"text-green-400 bg-green-500/10":"text-gray-300 hover:text-white hover:bg-white/5"}`}>
                                             {n.label}
                                         </a>
                                     ))}

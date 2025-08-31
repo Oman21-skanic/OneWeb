@@ -43,7 +43,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="bg-black relative text-white py-20 overflow-hidden">
+    <section id="projects" className="bg-black relative text-white py-20 overflow-hidden">
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-green-900/20 to-transparent pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 relative z-10">
@@ -54,9 +54,15 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-raligo text-white drop-shadow-lg">
+         <div className="inline-flex items-center gap-3 rounded-full border border-green-500/20 bg-black/50 px-5 py-2 text-sm font-medium text-green-300 shadow-inner mb-6">
+                Our Projects
+            </div>
+          <h2 className="text-5xl font-extrabold font-raligo text-white mb-4 drop-shadow-lg">
             OUR PROJECTS
           </h2>
+          <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+            We also prioritize collaboration and communication, ensuring that every project is a true partnership.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
