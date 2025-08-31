@@ -4,21 +4,21 @@
 
 @font-face {
     font-family: "Comfortaa";
-    src: url("../../public/fonts/Comfortaa-Regular.ttf") format("truetype");
+    src: url("/fonts/Comfortaa-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Raligo";
-    src: url("../../public/fonts/Raligo.otf") format("truetype");
+    src: url("/fonts/Raligo.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Telegraf";
-    src: url("../../public/fonts/jost.medium.otf") format("truetype");
+    src: url("/fonts/jost.medium.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
 }
