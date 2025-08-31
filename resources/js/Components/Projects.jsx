@@ -1,121 +1,128 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
-const sampleProjects = [
-    {
-        id: 1,
-        title: "Sistem Presensi Sekolah",
-        description: "Aplikasi presensi QR untuk siswa & guru, laporan real-time.",
-        tech: ["Laravel", "React", "MySQL"],
-        link: "#",
-        repo: "#",
-        img: "https://picsum.photos/400/250?random=1",
-    },
-    {
-        id: 2,
-        title: "Marketplace UMKM",
-        description: "Platform jual-beli untuk UMKM lokal dengan payment gateway.",
-        tech: ["Laravel", "React", "Midtrans"],
-        link: "#",
-        repo: "#",
-        img: "https://picsum.photos/400/250?random=2",
-    },
-    {
-        id: 3,
-        title: "Dashboard IoT Kebun",
-        description: "Monitoring kelembapan & nutrisi tanaman, notifikasi otomatis.",
-        tech: ["NodeMCU", "Laravel", "Chart.js"],
-        link: "#",
-        repo: "#",
-        img: "https://picsum.photos/400/250?random=3",
-    },
-    {
-        id: 4,
-        title: "E-Library Kampus",
-        description: "Pencarian buku, peminjaman digital, dan rekomendasi bacaan.",
-        tech: ["Laravel", "React", "ElasticSearch"],
-        link: "#",
-        repo: "#",
-        img: "https://picsum.photos/400/250?random=4",
-    },
+const projects = [
+  {
+    id: 1,
+    title: "Lorem Ipsum Dolor Sit Amet",
+    image:
+      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
+    tech: ["Laravel", "React", "MySQL"],
+    live: "#",
+    github: "https://github.com/dearalsa",
+  },
+  {
+    id: 2,
+    title: "Lorem Ipsum Dolor Sit Amet",
+    image:
+      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
+    tech: ["Next.js", "Tailwind", "MongoDB"],
+    live: "#",
+    github: "https://github.com/dearalsa",
+  },
+   {
+    id: 2,
+    title: "Lorem Ipsum Dolor Sit Amet",
+    image:
+      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
+    tech: ["Next.js", "Tailwind", "MongoDB"],
+    live: "#",
+    github: "https://github.com/dearalsa",
+  },
+   {
+    id: 2,
+    title: "Lorem Ipsum Dolor Sit Amet",
+    image:
+      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
+    tech: ["Next.js", "Tailwind", "MongoDB"],
+    live: "#",
+    github: "https://github.com/dearalsa",
+  },
 ];
 
-const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.1 } },
-};
-const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 120, damping: 16 } },
-};
-
 export default function Projects() {
-    return (
-        <section id="projects" className="relative py-28 border-t border-white/10 bg-black ">
-            <div className="relative mx-auto max-w-7xl px-6">
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-4 py-1 text-sm text-green-300 mb-4 mt-10">
-                        Projects
-                    </div>
-                    <h2 className="text-4xl font-bold text-white">Yang sudah & akan kami bangun</h2>
-                    <p className="text-gray-300 mt-2 max-w-2xl mx-auto">
-                        Beberapa contoh produk yang kami garap. Data bisa ditarik dari API Laravel atau placeholder.
-                    </p>
+  return (
+    <section className="bg-black relative text-white py-20 overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-green-900/20 to-transparent pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl font-raligo text-white drop-shadow-lg">
+            OUR PROJECTS
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 60, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.25,
+                ease: "easeOut",
+              }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02, rotate: [0, 0.3, 0] }}
+              className="group bg-zinc-900 rounded-3xl shadow-xl transition duration-500 overflow-hidden relative"
+            >
+
+              <div className="overflow-hidden relative">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+
+              <div className="p-8 relative z-10">
+                <h3 className="text-2xl font-telegraf mb-6">
+                  {project.title}
+                </h3>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 text-sm rounded-2xl bg-green-400 text-black font-telegraf shadow-md"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
 
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="grid gap-4 sm:grid-cols-1 md:grid-cols-2"
-                >
-                    {sampleProjects.map((p, i) => (
-                        <motion.a
-                            key={i}
-                            variants={item}
-                            href={p.link || "#"}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="group relative rounded-3xl overflow-hidden shadow-lg border border-white/10 hover:shadow-2xl transition transform hover:-translate-y-1"
-                        >
-                            {/* Gambar */}
-                            <div className="w-full h-52 overflow-hidden rounded-t-2xl">
-                                <img
-                                    src={p.img}
-                                    alt={p.title}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                />
-                            </div>
+                <div className="flex gap-4">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-400 to-green-600 text-black font-telegraf hover:shadow-lg hover:shadow-green-500/20 transition"
+                  >
+                    <ExternalLink size={18} /> Live Demo
+                  </a>
 
-                            {/* Konten */}
-                            <div className="p-6 bg-black/70">
-                                <h3 className="text-xl font-semibold text-white">{p.title}</h3>
-                                <p className="mt-2 text-gray-300 text-sm">{p.description}</p>
-                                <div className="flex flex-wrap gap-2 mt-3">
-                                    {p.tech.map((t, idx) => (
-                                        <span key={idx} className="text-xs text-green-300 border border-green-300 rounded-full px-2 py-1">
-                                            {t}
-                                        </span>
-                                    ))}
-                                </div>
-                                <div className="mt-4 flex gap-4 text-sm text-green-300">
-                                    {p.link && (
-                                        <span className="flex items-center gap-1 hover:underline">
-                                            Live <ExternalLink size={16} />
-                                        </span>
-                                    )}
-                                    {p.repo && (
-                                        <a href={p.repo} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:underline">
-                                            <Github size={16} /> Repo
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.a>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
-    );
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 hover:border-green-500/40 transition font-telegraf"
+                  >
+                    <Github size={18} /> GitHub
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
