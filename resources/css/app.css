@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Telegraf";
+    font-family: "Comfortaa";
     src: url("../../public/fonts/Comfortaa-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -16,3 +16,9 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Telegraf";
+    src: url("../../public/fonts/jost.medium.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}

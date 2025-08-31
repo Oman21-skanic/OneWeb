@@ -23,6 +23,7 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^7.0.0",
         "framer-motion": "^12.23.12",
         "lucide-react": "^0.542.0"
     }
