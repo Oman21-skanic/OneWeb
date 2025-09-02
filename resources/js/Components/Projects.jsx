@@ -60,15 +60,13 @@ export default function Projects() {
           </div>
           <h2 className="text-4xl font-extrabold font-telegraf text-white mb-4 tracking-tight">
             Crafting digital experiences with{" "}
-            <span className="underline-decoration-green-500">
-              passion
-            </span>{" "}
-            and <span className="text-green-400">precision.</span>
+            <span className="underline-decoration-green-500">passion</span> and{" "}
+            <span className="text-green-400">precision.</span>
           </h2>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}

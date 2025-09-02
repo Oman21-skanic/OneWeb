@@ -19,8 +19,6 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-4 rounded-2xl border border-green-400/20 bg-black/50 backdrop-blur shadow-lg">
           <div className="flex items-center justify-between px-4 py-3">
-            
-            {/* Logo */}
             <a href="#home" className="flex items-center gap-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +26,6 @@ export default function Navbar() {
                 width="40"
                 height="40"
               >
-                {/* Lingkaran O animasi */}
                 <circle
                   cx="60"
                   cy="60"
@@ -48,8 +45,6 @@ export default function Navbar() {
                     repeatCount="indefinite"
                   />
                 </circle>
-
-                {/* W modern */}
                 <path
                   d="M35 65 L50 85 L70 35 L90 85"
                   stroke="url(#animatedGradient)"
@@ -67,7 +62,6 @@ export default function Navbar() {
                   />
                 </path>
 
-                {/* Gradient animasi */}
                 <defs>
                   <linearGradient id="animatedGradient" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="#22c55e">
@@ -80,13 +74,11 @@ export default function Navbar() {
                 </defs>
               </svg>
 
-              {/* Teks OneWeb */}
               <span className="font-comfortaa font-semibold tracking-wide text-lg bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
                 OneWeb
               </span>
             </a>
 
-            {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-2">
               {nav.map((n) => (
                 <a
@@ -103,7 +95,6 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
                 onClick={() => setOpen((o) => !o)}
@@ -114,7 +105,6 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Nav */}
           <AnimatePresence>
             {open && (
               <motion.div

@@ -98,7 +98,6 @@ export default function ContactSection() {
           </motion.div>
         </motion.div>
 
-        {/* Form Kontak */}
         <motion.form
           onSubmit={onSubmit}
           className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4"
