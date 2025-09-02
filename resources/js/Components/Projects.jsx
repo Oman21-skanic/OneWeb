@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
-// 🔹 Data project (id harus unik)
 const projects = [
   {
     id: 1,
@@ -11,7 +10,7 @@ const projects = [
       "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
     tech: ["Laravel", "React", "MySQL"],
     live: "#",
-    github: "https://github.com/dearalsa",
+    github: "https://github.com/Oman21-skanic/OneWeb",
   },
   {
     id: 2,
@@ -20,7 +19,7 @@ const projects = [
       "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
     tech: ["Next.js", "Tailwind", "MongoDB"],
     live: "#",
-    github: "https://github.com/dearalsa",
+    github: "https://github.com/Oman21-skanic/OneWeb",
   },
   {
     id: 3,
@@ -29,7 +28,7 @@ const projects = [
       "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
     tech: ["Next.js", "Tailwind", "MongoDB"],
     live: "#",
-    github: "https://github.com/dearalsa",
+    github: "https://github.com/Oman21-skanic/OneWeb",
   },
   {
     id: 4,
@@ -38,7 +37,7 @@ const projects = [
       "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
     tech: ["Next.js", "Tailwind", "MongoDB"],
     live: "#",
-    github: "https://github.com/dearalsa",
+    github: "https://github.com/Oman21-skanic/OneWeb",
   },
 ];
 
@@ -48,9 +47,7 @@ export default function Projects() {
       id="projects"
       className="bg-black relative text-white py-20 overflow-hidden"
     >
-      {/* 🔹 Container utama */}
       <div className="max-w-5xl mx-auto px-4 relative z-10">
-        {/* 🔹 Judul section */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,12 +67,11 @@ export default function Projects() {
           </h2>
         </motion.div>
 
-        {/* 🔹 Grid project cards */}
         <div className="max-w-4xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
               <motion.div
-                key={project.id} // id unik
+                key={project.id}
                 initial={{ opacity: 0, y: 60, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{
@@ -87,7 +83,6 @@ export default function Projects() {
                 whileHover={{ scale: 1.02, rotate: [0, 0.3, 0] }}
                 className="group bg-zinc-900 rounded-3xl shadow-xl transition duration-500 overflow-hidden relative"
               >
-                {/* 🔹 Gambar project */}
                 <div className="overflow-hidden relative">
                   <img
                     src={project.image}
@@ -96,13 +91,11 @@ export default function Projects() {
                   />
                 </div>
 
-                {/* 🔹 Isi card */}
                 <div className="p-8 relative z-10">
                   <h3 className="text-2xl font-comfortaa mb-6">
                     {project.title}
                   </h3>
 
-                  {/* 🔹 Tech stack */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech, i) => (
                       <span
@@ -114,7 +107,6 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  {/* 🔹 Tombol aksi */}
                   <div className="flex gap-4">
                     <a
                       href={project.live}

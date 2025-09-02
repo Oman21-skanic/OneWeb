@@ -31,7 +31,7 @@ export default function ContactSection() {
       });
       if (!res.ok) throw new Error("Gagal mengirim pesan");
 
-      // langsung reload halaman
+      // reload halaman setelah submit sukses
       window.location.reload();
 
     } catch (err) {
@@ -43,19 +43,9 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative min-h-screen bg-black text-white py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.1),transparent_70%)] pointer-events-none" />
-
-      <motion.h1
-        className="absolute top-0 left-1/4 -translate-y-1/2 text-[5rem] md:text-[10rem] font-raligo text-white/5 select-none z-0"
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-      >
-        CONTACT
-      </motion.h1>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 mt-28">
+    <section id="contact" className="bg-black relative text-white py-20 overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 mt-10">
+        {/* Info Kontak */}
         <motion.div
           className="space-y-6"
           initial="hidden"
@@ -108,6 +98,7 @@ export default function ContactSection() {
           </motion.div>
         </motion.div>
 
+        {/* Form Kontak */}
         <motion.form
           onSubmit={onSubmit}
           className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4"
