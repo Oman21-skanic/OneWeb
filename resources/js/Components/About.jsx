@@ -2,14 +2,13 @@
     import { useEffect, useState, useCallback } from "react";
     import Particles, { initParticlesEngine } from "@tsparticles/react";
     import { loadSlim } from "@tsparticles/slim";
-    import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
     const team = [
     {
         name: "M. Abdul Rohman",
         role: "Project Manager",
         img: "https://i.pinimg.com/736x/2f/ed/c1/2fedc10cbc4d636644205fc98daa3cd9.jpg",
-        socials: { ig: "#", linkedin: "#", github: "#" },
+        socials: { ig: "https://www.instagram.com/omannn_1309/?utm_source=ig_web_button_share_sheet", linkedin: "#", github: "#" },
     },
     {
         name: "Putri Salsabila",
@@ -64,13 +63,17 @@
     return (
         <motion.div
         variants={cardItem}
-        whileHover={{ 
-            y: -5, 
-            boxShadow: "0 0 100px 20px rgba(65, 255, 163, 0.2)", // Blur hijau dengan spread besar dan opacity tipis
-            transition: { duration: 0.3 }
+        whileHover={{
+            y: -5,
+            boxShadow: "0 0 100px 20px rgba(65, 255, 163, 0.2)",
+            transition: { duration: 0.3 },
         }}
         onClick={handleClick}
-        animate={clicked ? { boxShadow: "0 0 25px #88ff00ff", transition: { duration: 0.3 } } : { boxShadow: "0 0 0 transparent" }}
+        animate={
+            clicked
+            ? { boxShadow: "0 0 25px #88ff00ff", transition: { duration: 0.3 } }
+            : { boxShadow: "0 0 0 transparent" }
+        }
         className="relative w-[240px] md:w-[260px] bg-black border border-gray-800 rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer shadow-md"
         >
         <div className="relative w-full h-[220px]">
@@ -80,14 +83,23 @@
             className="w-full h-full object-cover rounded-t-2xl"
             />
             <div className="absolute top-3 right-3 flex flex-col gap-2">
-            <a href={member.socials.ig} className="bg-gray-900 p-2 rounded-full text-white hover:bg-gray-700 transition">
-                <FaInstagram size={18} />
+            <a
+                href={member.socials.ig}
+                className="bg-gray-900 w-8 h-8 flex items-center justify-center rounded-lg text-white hover:bg-gray-700 transition"
+            >
+                <i className="fa-brands fa-instagram text-[15px]"></i>
             </a>
-            <a href={member.socials.linkedin} className="bg-gray-900 p-2 rounded-full text-white hover:bg-gray-700 transition">
-                <FaLinkedin size={18} />
+            <a
+                href={member.socials.linkedin}
+                className="bg-gray-900 w-8 h-8 flex items-center justify-center rounded-lg text-white hover:bg-gray-700 transition"
+            >
+                <i className="fa-brands fa-square-linkedin text-[15px]"></i>
             </a>
-            <a href={member.socials.github} className="bg-gray-900 p-2 rounded-full text-white hover:bg-gray-700 transition">
-                <FaGithub size={18} />
+            <a
+                href={member.socials.github}
+                className="bg-gray-900 w-8 h-8 flex items-center justify-center rounded-lg text-white hover:bg-gray-700 transition"
+            >
+                <i className="fa-brands fa-github text-[15px]"></i>
             </a>
             </div>
         </div>
@@ -147,7 +159,12 @@
         )}
 
         <div className="relative mx-auto max-w-7xl px-6 text-center z-10">
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="mb-20">
+            <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="mb-20"
+            >
             <div className="text-3xl font-Neue-Montreal-Light text-green-500 font-black mb-2">
                 Meet our team!
             </div>

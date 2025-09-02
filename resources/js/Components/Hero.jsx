@@ -57,7 +57,7 @@
             >
             Welcome to{" "}
             <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
-                TeamOne
+                OneWeb
             </span>
             </motion.h1>
 

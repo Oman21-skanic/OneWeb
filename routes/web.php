@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return Inertia::render('LandingPage');
+    return Inertia::render('Home');
 });
 
 Route::get('/font', function () {
