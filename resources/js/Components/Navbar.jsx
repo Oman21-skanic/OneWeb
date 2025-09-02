@@ -44,7 +44,7 @@ export default function Navbar() {
                     attributeName="stroke-dashoffset"
                     from="0"
                     to="628"
-                    dur="3s"
+                    dur="6s"
                     repeatCount="indefinite"
                   />
                 </circle>
@@ -62,7 +62,7 @@ export default function Navbar() {
                     attributeName="stroke-dashoffset"
                     from="0"
                     to="200"
-                    dur="2.5s"
+                    dur="6s"
                     repeatCount="indefinite"
                   />
                 </path>
