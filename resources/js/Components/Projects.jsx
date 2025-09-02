@@ -63,10 +63,10 @@ export default function Projects() {
           </div>
           <h2 className="text-4xl font-extrabold font-telegraf text-white mb-4 tracking-tight">
             Crafting digital experiences with{" "}
-            <span className="underline-decoration-green-500">
+            <span className=" ">
               passion
             </span>{" "}
-            and <span className="text-green-400">precision.</span>
+            and <span className="">precision.</span>
           </h2>
         </motion.div>
 

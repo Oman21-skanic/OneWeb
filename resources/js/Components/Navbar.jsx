@@ -17,7 +17,7 @@ export default function Navbar() {
                     <div className="flex items-center justify-between px-4 py-3">
                         <a href="#home" className="flex items-center gap-2">
                             <div className="h-3 w-3 rounded-full bg-green-500 shadow-[0_0_15px_4px_rgba(34,197,94,0.6)]" />
-                            <span className="font-semibold tracking-wide text-green-400">KelompokKita</span>
+                            <span className="font-semibold tracking-wide text-green-400">TeamOne</span>
                         </a>
                         <div className="hidden md:flex items-center gap-1">
                             {nav.map((n) => (

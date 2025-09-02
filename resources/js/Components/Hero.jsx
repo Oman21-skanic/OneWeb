@@ -1,70 +1,125 @@
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import { Rocket, ArrowRight, Mail, ChevronDown } from "lucide-react";
-import useParallax from "../hooks/useParallax";
+    import { motion } from "framer-motion";
+    import { FolderGit2, Mail } from "lucide-react";
 
-export default function Hero() {
-    const ref = useRef(null);
-    const { y, opacity } = useParallax(ref);
+    const fadeUp = (delay = 0) => ({
+    hidden: { opacity: 0, y: 40 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1.4, delay, ease: "easeOut" },
+    },
+    });
+
+    export default function Hero() {
+    // fungsi untuk smooth scroll
+    const handleScroll = (id) => {
+        const el = document.getElementById(id);
+        if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
     return (
-        <section id="home" ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
-            {/* Background Gradient + Animasi */}
-            <div className="absolute inset-0 animate-background-gradient" 
-                 style={{ background: "radial-gradient(circle at 20% 30%, rgba(34,197,94,0.15), transparent 40%), radial-gradient(circle at 80% 20%, rgba(34,197,94,0.15), transparent 40%)"}} />
+        <section id="home" className="relative min-h-screen bg-black text-white overflow-hidden flex flex-col items-center justify-center px-6">
+        {/* Background gradient glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-900/20 to-black pointer-events-none" />
 
-            {/* Konten Hero */}
-            <motion.div style={{ y, opacity }} className="relative z-10 w-full">
-                <div className="mx-auto max-w-7xl px-6 text-center sm:text-left">
-                    {/* Badge */}
-                    <motion.div initial={{ opacity:0, y:-20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.2, duration:0.8 }} className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-black/40 px-3 py-1 text-xs text-green-300 shadow-md">
-                        <Rocket size={14} /> We build useful things
-                    </motion.div>
+        {/* Floating orb effect */}
+        <motion.div
+            className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-green-500/30 blur-3xl pointer-events-none"
+            animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.5, 0.2],
+            x: [0, 30, -30, 0],
+            y: [0, 20, -20, 0],
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
 
-                    {/* Judul */}
-                    <motion.h1 
-                        initial={{ x:-50, opacity:0 }} 
-                        animate={{ x:0, opacity:1 }} 
-                        transition={{ delay:0.4, type:"spring", stiffness:120 }}
-                        className="mt-5 text-4xl sm:text-6xl font-extrabold tracking-tight text-white bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-200">
-                        Kelompok <span className="text-green-300">Kita</span> — Kreatif, Cepat, Terarah
-                    </motion.h1>
-
-                    {/* Deskripsi */}
-                    <motion.p 
-                        initial={{ x:50, opacity:0 }} 
-                        animate={{ x:0, opacity:1 }} 
-                        transition={{ delay:0.6, duration:1 }}
-                        className="mt-4 text-lg text-gray-300 max-w-xl mx-auto sm:mx-0">
-                        Kami membangun produk digital dengan standar tinggi. Dari ide hingga rilis, kami hadir untuk membuat dampak nyata.
-                    </motion.p>
-
-                    {/* Buttons */}
-                    <motion.div 
-                        initial={{ opacity:0, y:20 }} 
-                        animate={{ opacity:1, y:0 }} 
-                        transition={{ delay:0.8, duration:1 }} 
-                        className="mt-8 flex flex-wrap items-center justify-center justify-start  gap-4 ">
-                        <a href="#projects" className="inline-flex items-center gap-2 rounded-2xl bg-green-500 px-6 py-3 ml-8 font-semibold text-black hover:bg-green-400 transition-transform transform hover:scale-105 shadow-lg">
-                            Lihat Project <ArrowRight size={18} />
-                        </a>
-                        <a href="#contact" className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3 font-medium text-white hover:bg-white/20 transition hover:scale-105">
-                            Kontak Kami <Mail size={18} />
-                        </a>
-                    </motion.div>
-                </div>
+        {/* Main content */}
+        <div className="relative z-10 flex flex-col items-center">
+            {/* Header badge */}
+            <motion.div
+            variants={fadeUp(0.2)}
+            initial="hidden"
+            animate="show"
+            className="mb-6 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-sm flex items-center gap-2"
+            >
+            <span>One team. Many ideas</span>
             </motion.div>
 
-            {/* Scroll Indicator */}
-            <div className="absolute inset-x-0 bottom-6 flex justify-center">
-                <motion.div
-                    animate={{ y: [0,10,0] }}
-                    transition={{ duration:1.5, repeat:Infinity, ease:"easeInOut" }}
-                    className="text-green-400"
-                >
-                    <ChevronDown size={28} />
-                </motion.div>
+            {/* Main Heading */}
+            <motion.h1
+            variants={fadeUp(0.4)}
+            initial="hidden"
+            animate="show"
+            className="text-4xl sm:text-6xl font-bold text-center max-w-3xl leading-tight"
+            >
+            Welcome to{" "}
+            <span className="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                TeamOne
+            </span>
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+            variants={fadeUp(0.6)}
+            initial="hidden"
+            animate="show"
+            className="mt-4 text-lg text-gray-400 max-w-2x1 text-center"
+            >Kami adalah tim beranggotakan 6 orang yang menggabungkan desain, teknologi, dan ide-ide segar untuk menghadirkan proyek yang bermakna.
+            </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div
+            variants={fadeUp(0.8)}
+            initial="hidden"
+            animate="show"
+            className="mt-8 flex gap-4 flex-wrap justify-center"
+            >
+            {/* View Projects button */}
+            <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => handleScroll("projects")}
+                className="flex items-center px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 transition"
+            >
+                <FolderGit2 className="w-4 h-4 mr-2" /> View our projects
+            </motion.button>
+
+            {/* Contact Us button */}
+            <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => handleScroll("contact")}
+                className="px-6 py-3 rounded-lg bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:opacity-90 transition flex items-center gap-2"
+            >
+                <Mail className="w-4 h-4" /> Contact us
+            </motion.button>
+            </motion.div>
+
+                                    {/* <motion.div
+            variants={fadeUp(1)}
+            initial="hidden"
+            animate="show"
+            className="mt-12 text-center text-gray-400"
+            >
+            <p className="text-lg font-medium">Trusted by our partners & projects</p>
+            <div className="flex flex-wrap gap-6 justify-center mt-4 opacity-80">
+                <span className="text-sm">Hackathon 2024</span>
+                <span className="text-sm">Open Source</span>
+                <span className="text-sm">Startup X</span>
+                <span className="text-sm">Community Y</span>
             </div>
+            </motion.div> */}
+
+
+        </div>
+
+        {/* Curve effect */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black via-green-900/30 to-transparent rounded-t-[50%] pointer-events-none" />
         </section>
     );
-}
+    }
