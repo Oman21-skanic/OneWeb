@@ -17,7 +17,7 @@
 }
 
 @font-face {
-    font-family: "Telegraf";
+    font-family: "Satoshi";
     src: url("../../public/fonts/Satoshi-Variable.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
@@ -26,6 +26,13 @@
 @font-face {
     font-family: "Neue-Montreal-Light";
     src: url("../../public/fonts/NeueMontreal-Light.otf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Neue-Montreal-Bold";
+    src: url("../../public/fonts/NeueMontreal-Bold.otf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }

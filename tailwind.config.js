@@ -16,7 +16,7 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 comfortaa: ['Comfortaa', 'sans-serif'],
                 jost: ['jost'],
-                telegraf: ['Telegraf'],
+                satoshi: ['Satoshi'],
             },
         },
     },
