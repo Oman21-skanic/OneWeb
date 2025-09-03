@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function Hero() {
+export default function Hero({ heroes = [] }) {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -8,8 +8,8 @@ export default function Hero() {
 
   return (
     <section
-    id ="home" 
-    className="relative min-h-screen bg-gradient-to-b from-emerald-950/80 via-emerald-950/50 to-black flex flex-col items-center justify-center text-center text-white overflow-hidden">
+      id="home"
+      className="relative min-h-screen bg-gradient-to-b from-emerald-950/80 via-emerald-950/50 to-black flex flex-col items-center justify-center text-center text-white overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
@@ -58,16 +58,32 @@ export default function Hero() {
             OneWeb Team
           </span>
         </motion.div>
+        <div>
+          {heroes.length === 0 ? (
+            <>
+              <h1 className="text-4xl md:text-6xl font-Neue-Montreal font-bold leading-tight mb-6">
+                Menciptakan Proyek Digital Secara{" "}
+                <span className="text-emerald-300">Kolaboratif</span>
+              </h1>
+              <p className="text-gray-400 mb-8 font-comfortaa">
+                OneWeb adalah kelompok kreatif yang menyatukan ide dan
+                kolaborasi untuk menciptakan proyek digital inovatif.
+              </p>
+            </>
+          ) : (
+            heroes.map((hero) => (
+              <div key={hero.id}>
+                <h1 className="text-4xl md:text-6xl font-Neue-Montreal font-bold leading-tight mb-6">
+                  {hero.title}{" "}
+                </h1>
+                <p className="text-gray-400 mb-8 font-comfortaa">
+                  {hero.subtitle}
+                </p>
+              </div>
+            ))
+          )}
 
-        <h1 className="text-4xl md:text-6xl font-Neue-Montreal font-bold leading-tight mb-6">
-          Menciptakan Proyek Digital Secara{" "}
-          <span className="text-emerald-300">Kolaboratif</span>
-        </h1>
-
-        <p className="text-gray-400 mb-8 font-comfortaa">
-          OneWeb adalah kelompok kreatif yang menyatukan ide dan 
-          kolaborasi untuk menciptakan proyek digital inovatif.
-        </p>
+        </div>
 
         <div className="flex gap-4 flex-wrap justify-center">
           <motion.button

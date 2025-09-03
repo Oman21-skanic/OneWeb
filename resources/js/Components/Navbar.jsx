@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import useSectionObserver from "../hooks/useSectionObserver";
+import { Link } from '@inertiajs/react';
+
 
 const nav = [
   { id: "home", label: "Home" },
@@ -117,15 +119,18 @@ export default function Navbar() {
                   key={n.id}
                   href={`#${n.id}`}
                   onClick={(e) => handleScroll(e, n.id)}
-                  className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${
-                    active === n.id
-                      ? "text-green-500 bg-green-500/10"
-                      : "text-gray-300 hover:text-white hover:bg-white/5"
-                  }`}
+                  className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${active === n.id
+                    ? "text-green-500 bg-green-500/10"
+                    : "text-gray-300 hover:text-white hover:bg-white/5"
+                    }`}
                 >
                   {n.label}
                 </a>
               ))}
+            </div>
+            <div>
+              <Link href={route('login')} className=" p-2 rounded-xl border border-white/10 hover:bg-white/5 transition-all duration-200 hover:underline ">Login</Link>
+              {/* <Link href={route('register')} className=" p-2 rounded-xl border border-white/10 hover:bg-white/5 transition-all duration-200 hover:underline">Register</Link> */}
             </div>
 
             {/* Mobile menu button */}
@@ -154,11 +159,10 @@ export default function Navbar() {
                       key={n.id}
                       href={`#${n.id}`}
                       onClick={(e) => handleScroll(e, n.id)}
-                      className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${
-                        active === n.id
-                          ? "text-green-500 bg-green-500/10"
-                          : "text-gray-300 hover:text-white hover:bg-white/5"
-                      }`}
+                      className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${active === n.id
+                        ? "text-green-500 bg-green-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                        }`}
                     >
                       {n.label}
                     </a>
