@@ -31,13 +31,13 @@
     {
         name: "M. Fauzi Ibnu Kosim",
         role: "UX/UI Designer",
-        img: "/assets/images/3.png",
+        img: "/assets/images/4.png",
         socials: { ig: "https://www.instagram.com/papoyyyooo/?utm_source=ig_web_button_share_sheet", linkedin: "https://www.linkedin.com/in/muhammad-fauzi-143190382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app", github: "https://github.com/MFauziik" },
     },
     {
         name: "Rakha Pradipta",
         role: "Digital Business",
-        img: "/assets/images/4.png",
+        img: "/assets/images/3.png",
         socials: { ig: "https://www.instagram.com/rakha7095?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==", linkedin: "https://www.linkedin.com/in/rakha-pradipta-6a1089382/", github: "https://github.com/Rakha675" },
     },
     ];
