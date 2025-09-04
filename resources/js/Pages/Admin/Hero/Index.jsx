@@ -27,39 +27,40 @@ export default function HeroIndex({ auth, heroes }) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    Hero Manager
+                <h2 className="text-lg md:text-xl font-semibold text-emerald-400">
+                    Hero Admin
                 </h2>
             }
         >
             <Head title="Hero Manager" />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="bg-gradient-to-br from-black via-gray-900 to-green-900 text-gray-100 rounded-xl shadow-xl p-8">
+            <div className="py-6 md:py-12">
+                <div className="mx-auto max-w-7xl sm:px-4 lg:px-8">
+                    {/* Box utama abu-abu */}
+                    <div className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-xl shadow-xl p-6 md:p-8">
                         {/* Form tambah hero */}
-                        <form onSubmit={handleSubmit} className="mb-10">
-                            <h2 className="text-xl mb-4 font-semibold text-green-300">
+                        <form onSubmit={handleSubmit} className="mb-10 space-y-3">
+                            <h2 className="text-lg md:text-xl font-semibold text-gray-700 dark:text-gray-300">
                                 Add New Hero
                             </h2>
                             <input
                                 type="text"
                                 placeholder="Title"
-                                className="w-full p-2 rounded bg-gray-800 text-white mb-3"
+                                className="w-full p-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                                 value={data.title}
                                 onChange={(e) => setData('title', e.target.value)}
                             />
                             <input
                                 type="text"
                                 placeholder="Subtitle"
-                                className="w-full p-2 rounded bg-gray-800 text-white mb-3"
+                                className="w-full p-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-400"
                                 value={data.subtitle}
                                 onChange={(e) => setData('subtitle', e.target.value)}
                             />
                             <button
                                 type="submit"
                                 onClick={() => setData('status', 'draft')}
-                                className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white"
+                                className="border border-gray-500 text-gray-700 dark:text-gray-300 px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition w-full sm:w-auto"
                             >
                                 Save (Draft)
                             </button>
@@ -70,21 +71,26 @@ export default function HeroIndex({ auth, heroes }) {
                             {heroes.map((hero) => (
                                 <div
                                     key={hero.id}
-                                    className="bg-gray-800 rounded-lg p-6 shadow-md flex justify-between items-center"
+                                    className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 md:p-6 shadow-md flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4"
                                 >
-                                    <div>
-                                        <h3 className="text-lg font-bold">{hero.title}</h3>
-                                        <p className="text-gray-400">{hero.subtitle}</p>
+                                    <div className="flex-1">
+                                        <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-gray-100 break-words">
+                                            {hero.title}
+                                        </h3>
+                                        <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 break-words">
+                                            {hero.subtitle}
+                                        </p>
                                         <span
-                                            className={`text-sm px-2 py-1 rounded ${hero.status === 'published'
-                                                ? 'bg-green-600'
-                                                : 'bg-gray-600'
-                                                }`}
+                                            className={`inline-block mt-2 sm:mt-0 text-xs md:text-sm px-2 py-1 rounded ${
+                                                hero.status === 'published'
+                                                    ? 'bg-emerald-600 text-white'
+                                                    : 'bg-gray-500 text-white'
+                                            }`}
                                         >
                                             {hero.status}
                                         </span>
                                     </div>
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 flex-wrap">
                                         <button
                                             onClick={() =>
                                                 handleUpdate(hero.id, {
@@ -95,13 +101,19 @@ export default function HeroIndex({ auth, heroes }) {
                                                             : 'draft',
                                                 })
                                             }
-                                            className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm"
+                                            className={`px-3 py-1 rounded text-sm transition border w-full sm:w-auto ${
+                                                hero.status === 'draft'
+                                                    ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-600 hover:text-white'
+                                                    : 'border-yellow-500 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-600 hover:text-white'
+                                            }`}
                                         >
-                                            {hero.status === 'draft' ? 'Publish' : 'Unpublish'}
+                                            {hero.status === 'draft'
+                                                ? 'Publish'
+                                                : 'Unpublish'}
                                         </button>
                                         <button
                                             onClick={() => handleDelete(hero.id)}
-                                            className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-sm"
+                                            className="border border-red-500 text-red-600 dark:text-red-400 hover:bg-red-600 hover:text-white px-3 py-1 rounded text-sm transition w-full sm:w-auto"
                                         >
                                             Delete
                                         </button>
