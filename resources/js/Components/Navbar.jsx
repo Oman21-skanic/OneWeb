@@ -2,8 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import useSectionObserver from "../hooks/useSectionObserver";
-import { Link } from '@inertiajs/react';
-
+import { Link } from "@inertiajs/react";
 
 const nav = [
   { id: "home", label: "Home" },
@@ -16,14 +15,13 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const active = useSectionObserver(nav.map((n) => n.id));
 
-  // Fungsi untuk gulir halus
   const handleScroll = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
-    setOpen(false); // otomatis nutup kalau di mobile
+    setOpen(false);
   };
 
   return (
@@ -119,19 +117,30 @@ export default function Navbar() {
                   key={n.id}
                   href={`#${n.id}`}
                   onClick={(e) => handleScroll(e, n.id)}
-                  className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${active === n.id
-                    ? "text-green-500 bg-green-500/10"
-                    : "text-gray-300 hover:text-white hover:bg-white/5"
-                    }`}
+                  className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${
+                    active === n.id
+                      ? "text-green-500 bg-green-500/10"
+                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                  }`}
                 >
                   {n.label}
                 </a>
               ))}
             </div>
-            <div>
-              <Link href={route('login')} className=" p-2 rounded-xl border border-white/10 hover:bg-white/5 transition-all duration-200 hover:underline ">Login</Link>
-              {/* <Link href={route('register')} className=" p-2 rounded-xl border border-white/10 hover:bg-white/5 transition-all duration-200 hover:underline">Register</Link> */}
-            </div>
+
+      {/* Login button transparan, hover tetap gradient */}
+      <motion.div whileTap={{ scale: 0.95 }}>
+        <Link
+          href={route("login")}
+          className="relative px-6 py-2.5 font-comfortaa font-medium rounded-xl text-gray-200 transition-all duration-300
+                    bg-transparent
+                    hover:[background:linear-gradient(#111,#111)_padding-box,linear-gradient(to_right,#22c55e,#16a34a)_border-box]
+                    hover:shadow-[0_0_12px_rgba(34,197,94,0.4)]"
+        >
+          Login
+        </Link>
+      </motion.div>
+
 
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -159,10 +168,11 @@ export default function Navbar() {
                       key={n.id}
                       href={`#${n.id}`}
                       onClick={(e) => handleScroll(e, n.id)}
-                      className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${active === n.id
-                        ? "text-green-500 bg-green-500/10"
-                        : "text-gray-300 hover:text-white hover:bg-white/5"
-                        }`}
+                      className={`px-3 py-2 rounded-xl text-sm transition-all duration-300 font-comfortaa ${
+                        active === n.id
+                          ? "text-green-500 bg-green-500/10"
+                          : "text-gray-300 hover:text-white hover:bg-white/5"
+                      }`}
                     >
                       {n.label}
                     </a>

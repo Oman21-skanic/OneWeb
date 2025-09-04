@@ -5,41 +5,60 @@ import { ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Lorem Ipsum Dolor Sit Amet",
+    title: "EcoTrack – Smart Farming Dashboard",
     image:
-      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
-    tech: ["Laravel", "React", "MySQL"],
+      "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNtYXJ0JTIwZmFybWluZ3xlbnwwfHwwfHx8MA%3D%3D",
+    tech: ["Next.js", "Tailwind", "RESTful API"],
     live: "#",
-    github: "https://github.com/Oman21-skanic/OneWeb",
+    github: "#",
   },
   {
     id: 2,
-    title: "Lorem Ipsum Dolor Sit Amet",
+    title: "CaffeineHub – Coffee Shop Ordering App",
     image:
-      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
-    tech: ["Next.js", "Tailwind", "MongoDB"],
+      "https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    tech: ["React", "Firebase", "Stripe"],
     live: "#",
-    github: "https://github.com/Oman21-skanic/OneWeb",
+    github: "#",
   },
   {
     id: 3,
-    title: "Lorem Ipsum Dolor Sit Amet",
+    title: "StreamVerse – Music & Podcast Platform",
     image:
-      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
-    tech: ["Next.js", "Tailwind", "MongoDB"],
+      "https://plus.unsplash.com/premium_photo-1721128468152-af901dd8f9b8?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    tech: ["Next.js", "Node.js", "MongoDB"],
     live: "#",
-    github: "https://github.com/Oman21-skanic/OneWeb",
+    github: "#",
   },
   {
     id: 4,
-    title: "Lorem Ipsum Dolor Sit Amet",
+    title: "FoodSnap – AI Recipe Generator",
     image:
-      "https://i.pinimg.com/1200x/7a/15/7c/7a157c19db11d707d51877ec7941c1ba.jpg",
-    tech: ["Next.js", "Tailwind", "MongoDB"],
+      "https://images.unsplash.com/photo-1634043319926-c2565ac15c63?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    tech: ["React", "OpenAI API", "Tailwind"],
     live: "#",
-    github: "https://github.com/Oman21-skanic/OneWeb",
+    github: "#",
+  },
+  {
+    id: 5,
+    title: "Wanderlust – Travel Blog CMS",
+    image:
+      "https://plus.unsplash.com/premium_photo-1684407617181-3408b55fef8e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    tech: ["Laravel", "MySQL", "Bootstrap"],
+    live: "#",
+    github: "#",
+  },
+  {
+    id: 6,
+    title: "FitLife – Fitness Tracking App",
+    image:
+      "https://plus.unsplash.com/premium_photo-1712761999986-0686ec32ad91?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    tech: ["React Native", "Redux", "Supabase"],
+    live: "#",
+    github: "#",
   },
 ];
+
 
 export default function Projects() {
   return (

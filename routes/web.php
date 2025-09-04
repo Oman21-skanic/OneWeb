@@ -19,7 +19,6 @@ Route::get('/', function () {
 Route::get('/home', function () {
     $heroes = Hero::where('status', 'published')->get();
     return Inertia::render('Home', [
-        // 'hero' => Hero::where('status', 'published')->first(),
         'heroes' => $heroes,
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -49,6 +48,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('hero', HeroController::class);
 });
 
-
+// ✅ Fallback route untuk halaman yang tidak ditemukan
+Route::fallback(function () {
+    return Inertia::render('NotFound');
+});
 
 require __DIR__ . '/auth.php';
