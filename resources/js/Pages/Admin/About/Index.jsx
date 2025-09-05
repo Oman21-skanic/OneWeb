@@ -10,14 +10,12 @@ const DEFAULT_SOCIALS = {
   github: 'https://github.com/',
 };
 
-
 export default function AboutIndex({ auth, team: initialTeam }) {
   const [team, setTeam] = useState(initialTeam);
   const [editingMember, setEditingMember] = useState(null);
   const [previewImg, setPreviewImg] = useState(null);
   const [editPreviewImg, setEditPreviewImg] = useState(null);
   const { props } = usePage();
-//   const [team, setTeam] = useState(initialTeam);
 
   const { data, setData, post, reset } = useForm({
     name: '',
@@ -26,39 +24,32 @@ export default function AboutIndex({ auth, team: initialTeam }) {
     socials: { ...DEFAULT_SOCIALS },
   });
 
-
-  // Tambahkan member baru dari flash data
   useEffect(() => {
     if (props.new_member) {
       setTeam([...team, props.new_member]);
     }
   }, [props.new_member]);
 
-  // Tambah anggota
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('name', data.name || 'No Name');
     formData.append('role', data.role || 'No Role');
     if (data.img_url) formData.append('img_url', data.img_url);
-formData.append('socials[ig]', data.socials.ig || '');
-formData.append('socials[linkedin]', data.socials.linkedin || '');
-formData.append('socials[github]', data.socials.github || '');
+    formData.append('socials[ig]', data.socials.ig || '');
+    formData.append('socials[linkedin]', data.socials.linkedin || '');
+    formData.append('socials[github]', data.socials.github || '');
 
-
-   post(route('admin.about.store'), formData, {
-  onSuccess: () => {
-    reset(); // reset form
-    setPreviewImg(null); // reset preview
-    router.reload(); // reload Inertia page agar list ter-update otomatis
-  },
-  onError: (errors) => console.log(errors),
-});
-
-
+    post(route('admin.about.store'), formData, {
+      onSuccess: () => {
+        reset();
+        setPreviewImg(null);
+        router.reload();
+      },
+      onError: (errors) => console.log(errors),
+    });
   };
 
-  // Edit anggota
   const handleEdit = (id) => {
     const member = team.find((m) => m.id === id);
     setEditingMember({
@@ -93,7 +84,6 @@ formData.append('socials[github]', data.socials.github || '');
     });
   };
 
-  // Delete anggota
   const handleDelete = (id) => {
     if (confirm('Yakin hapus anggota ini?')) {
       router.delete(route('admin.about.destroy', id), {
@@ -114,11 +104,24 @@ formData.append('socials[github]', data.socials.github || '');
               <h2 className="text-lg md:text-xl font-semibold text-emerald-400">Add New Team Member</h2>
               <TextInput type="text" placeholder="Name" value={data.name} onChange={(e) => setData('name', e.target.value)} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
               <TextInput type="text" placeholder="Role" value={data.role} onChange={(e) => setData('role', e.target.value)} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
-              <input type="file" onChange={(e) => {
-                setData('img_url', e.target.files[0] || null);
-                if (e.target.files[0]) setPreviewImg(URL.createObjectURL(e.target.files[0]));
-                else setPreviewImg(null);
-              }} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
+
+              {/* Custom File Input */}
+              <div>
+                <label htmlFor="add-img" className="cursor-pointer px-4 py-2 rounded bg-emerald-700 text-white hover:bg-emerald-600 transition inline-block">
+                  Choose Image
+                </label>
+                <input
+                  id="add-img"
+                  type="file"
+                  className="hidden"
+                  onChange={(e) => {
+                    setData('img_url', e.target.files[0] || null);
+                    if (e.target.files[0]) setPreviewImg(URL.createObjectURL(e.target.files[0]));
+                    else setPreviewImg(null);
+                  }}
+                />
+              </div>
+
               <TextInput type="text" placeholder="Instagram URL" value={data.socials.ig} onChange={(e) => setData('socials', { ...data.socials, ig: e.target.value })} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
               <TextInput type="text" placeholder="LinkedIn URL" value={data.socials.linkedin} onChange={(e) => setData('socials', { ...data.socials, linkedin: e.target.value })} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
               <TextInput type="text" placeholder="GitHub URL" value={data.socials.github} onChange={(e) => setData('socials', { ...data.socials, github: e.target.value })} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
@@ -144,11 +147,24 @@ formData.append('socials[github]', data.socials.github || '');
                 <h2 className="text-lg md:text-xl font-semibold text-emerald-400">Edit Member</h2>
                 <TextInput type="text" placeholder="Name" value={editingMember.name} onChange={(e) => setEditingMember({ ...editingMember, name: e.target.value })} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
                 <TextInput type="text" placeholder="Role" value={editingMember.role} onChange={(e) => setEditingMember({ ...editingMember, role: e.target.value })} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
-                <input type="file" onChange={(e) => {
-                  setEditingMember({ ...editingMember, img_url: e.target.files[0] });
-                  if (e.target.files[0]) setEditPreviewImg(URL.createObjectURL(e.target.files[0]));
-                  else setEditPreviewImg(null);
-                }} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
+
+                {/* Custom File Input Edit */}
+                <div>
+                  <label htmlFor="edit-img" className="cursor-pointer px-4 py-2 rounded bg-emerald-700 text-white hover:bg-emerald-600 transition inline-block">
+                    Change Image
+                  </label>
+                  <input
+                    id="edit-img"
+                    type="file"
+                    className="hidden"
+                    onChange={(e) => {
+                      setEditingMember({ ...editingMember, img_url: e.target.files[0] });
+                      if (e.target.files[0]) setEditPreviewImg(URL.createObjectURL(e.target.files[0]));
+                      else setEditPreviewImg(null);
+                    }}
+                  />
+                </div>
+
                 <TextInput type="text" placeholder="Instagram URL" value={editingMember.socials.ig} onChange={(e) => setEditingMember({ ...editingMember, socials: { ...editingMember.socials, ig: e.target.value }})} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
                 <TextInput type="text" placeholder="LinkedIn URL" value={editingMember.socials.linkedin} onChange={(e) => setEditingMember({ ...editingMember, socials: { ...editingMember.socials, linkedin: e.target.value }})} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
                 <TextInput type="text" placeholder="GitHub URL" value={editingMember.socials.github} onChange={(e) => setEditingMember({ ...editingMember, socials: { ...editingMember.socials, github: e.target.value }})} className="w-full p-2 bg-black text-white border-b-2 border-emerald-500 focus:outline-none focus:border-emerald-400" />
