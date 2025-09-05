@@ -191,8 +191,8 @@ export default function AboutIndex({ auth, team: initialTeam }) {
                       <h3 className="text-base md:text-lg font-bold text-white break-words">{member.name || 'No Name'}</h3>
                       <p className="text-sm md:text-base text-white/70 break-words">{member.role || 'No Role'}</p>
                       <div className="flex gap-2 mt-1">
-                        <a href={member.socials?.ig || DEFAULT_SOCIALS.ig} target="_blank" className="text-pink-500 hover:text-pink-400 text-sm">IG</a>
-                        <a href={member.socials?.linkedin || DEFAULT_SOCIALS.linkedin} target="_blank" className="text-blue-500 hover:text-blue-400 text-sm">LinkedIn</a>
+                        <a href={member.socials?.ig || DEFAULT_SOCIALS.ig} target="_blank" className="text-sm text-emerald-300 hover:text-emerald-200 transition">IG</a>
+                        <a href={member.socials?.linkedin || DEFAULT_SOCIALS.linkedin} target="_blank" className="text-blue-300 hover:text-blue-300 text-sm transition">LinkedIn</a>
                         <a href={member.socials?.github || DEFAULT_SOCIALS.github} target="_blank" className="text-gray-200 hover:text-white text-sm">GitHub</a>
                       </div>
                     </div>
