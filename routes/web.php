@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Hero;
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
     Route::resource('hero', HeroController::class);
+    Route::resource('about', AboutController::class);
 });
 
 // ✅ Fallback route untuk halaman yang tidak ditemukan
