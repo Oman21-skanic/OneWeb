@@ -97,7 +97,7 @@ export default function AuthenticatedLayout({ header, children }) {
           </Link>
 
           <Link
-            href={route('admin.about.index')}
+            href={route('admin.member.index')}
             className="flex items-center gap-3 rounded-lg px-3 py-2 text-emerald-400 hover:bg-emerald-900/80 hover:text-white transition"
           >
             <User className="h-5 w-5 text-emerald-400" />

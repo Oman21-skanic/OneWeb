@@ -1,7 +1,11 @@
 <?php
 
+// use App\Http\Controllers\Admin\AboutController;
+
+use App\Http\Controllers\AboutController as ControllersAboutController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\HeroController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Hero;
 use Illuminate\Foundation\Application;
@@ -47,8 +51,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         return Inertia::render('Admin/Dashboard');
     })->name('dashboard');
     Route::resource('hero', HeroController::class);
-    Route::resource('about', AboutController::class);
+    Route::resource('member', MemberController::class);
+    // Route::get('/about', [\App\Http\Controllers\Admin\MemberController::class, 'about'])->name('about');
 });
+Route::get('/about', [ControllersAboutController::class, 'index'])->name('about.index');
 
 // ✅ Fallback route untuk halaman yang tidak ditemukan
 Route::fallback(function () {

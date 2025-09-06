@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('team_members', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('role');
             $table->string('img_url')->nullable();
             $table->json('medsos')->nullable();
+            // Alternatively, if you prefer separate columns for each social media platform:
+            // $table->string('instagram_url')->nullable();
+            // $table->string('linkedin_url')->nullable();
+            // $table->string('github_url')->nullable();
+
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_members');
+        Schema::dropIfExists('members');
     }
 };
